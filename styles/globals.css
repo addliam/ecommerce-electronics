@@ -14,6 +14,20 @@ body {
   font-family: "Inter", sans-serif;
   min-height: 100vh;
 }
+.gradient_1 {
+  background: linear-gradient(107.71deg, #5b64ff 4.67%, #b455f0 87.07%);
+}
+.gradient_2 {
+  background: linear-gradient(258.14deg, #5a81ff 6.02%, #4b60ff 83.87%);
+}
+.underlinewhite::before {
+  content: "";
+  position: absolute;
+  width: 7em;
+  background-color: #ffffff;
+  height: 2px;
+  bottom: -4px;
+}
 .debug {
   border: 1px solid black;
 }
