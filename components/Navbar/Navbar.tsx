@@ -5,8 +5,8 @@ import SearchProduct from "../common/SearchProduct";
 
 const Navbar = () => {
   return (
-    <nav className="debug h-[4.25em] w-full flex items-center gap-2">
-      <ul className="debug flex flex-row items-center w-fit ">
+    <nav className="h-[4.25em] w-fit flex items-center gap-2">
+      <ul className="flex flex-row items-center w-fit ">
         <li className="px-[1em] py-[.25em]">
           <Link href={"/"}>
             <Image
