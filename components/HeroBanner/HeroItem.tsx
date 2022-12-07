@@ -9,13 +9,13 @@ interface HeroItemProps {
 
 const HeroItem = ({ hero }: HeroItemProps) => {
   return (
-    <div className="gradient_1 h-[250px] w-[475px] px-[28px] py-[28px] relative">
+    <div className="gradient_banner h-[250px] w-[475px] px-[28px] py-[28px] relative">
       <div>
         <p className="text-[24px] text-white font-semibold max-w-[220px] leading-snug">
           {hero.text}
         </p>
         <span className="text-white text-[16px] mt-4 block relative underlinewhite ">
-          <Link href={"/watch-slug"}>Comprar ahora</Link>
+          <Link href={hero.slug}>Comprar ahora</Link>
         </span>
       </div>
       <div className="absolute top-4 right-4 ">

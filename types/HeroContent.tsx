@@ -7,5 +7,6 @@ interface HeroContent {
     width: SafeNumber;
     height: SafeNumber;
   };
+  slug: string;
 }
 export default HeroContent;
