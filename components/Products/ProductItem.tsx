@@ -1,68 +1,92 @@
 import React from "react";
 import Image from "next/image";
+import ProductShort from "../../types/ProductShort";
 
 const StarYellow = () => {
   return (
-    <Image
-      src={"/assets/icons/star-yellow.svg"}
-      alt="yellow star"
-      width="12"
-      height="12"
-    ></Image>
+    <div className="w-[14px] h-[14px] flex justify-center items-center">
+      <Image
+        src={"/assets/icons/star-yellow.svg"}
+        alt="yellow star"
+        width={12}
+        height={12}
+      ></Image>
+    </div>
   );
 };
 const StarGray = () => {
   return (
-    <Image
-      src={"/assets/icons/star-gray.svg"}
-      alt="gray star"
-      width="12"
-      height="12"
-    ></Image>
+    <div className="w-[14px] h-[14px] flex justify-center items-center">
+      <Image
+        src={"/assets/icons/star-gray.svg"}
+        alt="gray star"
+        width={12}
+        height={12}
+      ></Image>
+    </div>
   );
 };
-const numberStars = 4;
-const ProductItem = () => {
+
+type ProductItemProps = {
+  product: ProductShort;
+};
+
+const formatThreeDigits = (value: number): string => {
+  let str = `${value}`;
+  let res = "";
+  let len = str.length;
+  for (let i = len - 1; i >= 0; i--) {
+    res += str[i];
+    if ((len - i) % 3 === 0 && i !== 0) {
+      res += ",";
+    }
+  }
+  return res.split("").reverse().join("");
+};
+
+const ProductItem = ({ product }: ProductItemProps) => {
+  const numberStars = ~~product.rating;
   return (
     <div className="flex flex-row w-auto bg-white">
       <div className="flex flex-row justify-center items-center w-[15.25em] h-[11em] ">
-        <Image
-          src={"/assets/images/macbook1.png"}
-          width="224"
-          height="142"
-          alt="macbook"
-        ></Image>
+        <div className="w-[226px] h-[144px] flex justify-center items-center">
+          <Image
+            src={product.imageSrc}
+            width={224}
+            height={142}
+            alt={product.slug}
+          ></Image>
+        </div>
       </div>
       <div className="px-4 py-4 flex flex-col gap-3 max-w-[580px]">
         <div>
           <span className="text-[1.125em] text-text font-semibold">
-            Apple Macbook Air (12 pulgadas, 2020, Chip M1, 256GB de SSD, 8 GB de
-            RAM) - Gris espacial
+            {product.name}
           </span>
         </div>
         <div className="price flex flex-row gap-2">
-          <span className="text-[14px] font-medium text-text">$25,000</span>
-          <span className="text-[14px] font-medium text-primary line-through">
-            $25.999
+          <span className="text-[14px] font-medium text-text">
+            {`$${formatThreeDigits(product.currentPrice)}`}
           </span>
-          <div className="valoration flex flex-row gap-1">
+          <span className="text-[14px] font-medium text-primary line-through">
+            {`$${formatThreeDigits(product.oldPrice)}`}
+          </span>
+          <div className="valoration debug items-center flex flex-row gap-1 w-auto h-auto">
             {Array(numberStars)
               .fill("x")
-              .map((_) => (
-                <StarYellow />
+              .map((_, indx) => (
+                <StarYellow key={indx} />
               ))}
             {Array(5 - numberStars)
               .fill("x")
-              .map((_) => (
-                <StarGray />
+              .map((_, indx) => (
+                <StarGray key={indx} />
               ))}
           </div>
         </div>
         <div className="descr">
           <span className="text-[14px] text-subtextcolor">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid hic
-            reprehenderit dolor eos omnis dolore nisi ullam error corporis
-            recusandae ...
+            {product.description}
           </span>
         </div>
       </div>
