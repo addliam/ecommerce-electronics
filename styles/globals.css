@@ -34,8 +34,17 @@ body {
   height: 2px;
   bottom: -4px;
 }
+.smoothTransition {
+  transition: transform 90ms ease-in-out;
+}
 .debug {
   border: 1px solid black;
+}
+.debug2 {
+  border: 1px solid yellow;
+}
+.debug3 {
+  border: 1px solid purple;
 }
 
 .linerbg {

@@ -50,13 +50,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
   return (
     <div className="flex flex-row w-auto bg-white">
-      <div className="flex flex-row justify-center items-center w-[15.25em] h-[11em] ">
-        <div className="w-[226px] h-[144px] flex justify-center items-center">
+      <div className="px-2 py-3 flex flex-row justify-center items-center w-[15.25em] h-[11em] ">
+        <div className="w-full h-full relative flex justify-center items-center">
           <Image
             src={product.imageSrc}
-            width={224}
-            height={142}
             alt={product.slug}
+            fill={true}
+            style={{ objectFit: "contain" }}
           ></Image>
         </div>
       </div>

@@ -9,7 +9,7 @@ interface HeroItemProps {
 
 const HeroItem = ({ hero }: HeroItemProps) => {
   return (
-    <div className="gradient_banner h-[250px] w-[475px] px-[28px] py-[28px] relative">
+    <div className="gradient_banner flex-shrink-0 h-[250px] w-[475px] px-[28px] py-[28px] relative">
       <div>
         <p className="text-[24px] text-white font-semibold max-w-[220px] leading-snug">
           {hero.text}
@@ -22,8 +22,8 @@ const HeroItem = ({ hero }: HeroItemProps) => {
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
-          width={hero.image.width}
-          height={hero.image.height}
+          width={240}
+          height={240}
         ></Image>
       </div>
     </div>
