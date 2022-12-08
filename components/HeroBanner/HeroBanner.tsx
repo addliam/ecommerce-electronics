@@ -32,7 +32,6 @@ const HeroBanner = () => {
   };
   const offsetItemPercentage = 52;
   const TwoSlidesOnPixels = 966;
-  // numberElements/2 - 1 cause start at 0
   const numberElements = 5;
   const maxIndex = Math.ceil(numberElements / 2);
   const moveLeft = () => {

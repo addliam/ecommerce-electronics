@@ -50,7 +50,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
   return (
     <div className="flex flex-row w-auto bg-white">
-      <div className="px-2 py-3 flex flex-row justify-center items-center w-[15.25em] h-[11em] ">
+      <div className="px-2 py-3 flex flex-row justify-center items-center w-[15.25em] min-h-[11em] ">
         <div className="w-full h-full relative flex justify-center items-center">
           <Image
             src={product.imageSrc}
@@ -88,7 +88,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
         </div>
         <div className="descr">
           <span className="text-[14px] text-subtextcolor">
-            {product.description}
+            {/* 226 len */}
+            {product.description.length < 226
+              ? product.description
+              : `${product.description.split("").slice(0, 226).join("")}...`}
           </span>
         </div>
       </div>
