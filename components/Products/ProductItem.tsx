@@ -45,7 +45,9 @@ const formatThreeDigits = (value: number): string => {
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
-  const numberStars = ~~product.rating;
+  const numberStars = product.rating ? ~~product.rating : 1;
+  const excedent = 5 - numberStars;
+
   return (
     <div className="flex flex-row w-auto bg-white">
       <div className="flex flex-row justify-center items-center w-[15.25em] h-[11em] ">
@@ -71,13 +73,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <span className="text-[14px] font-medium text-primary line-through">
             {`$${formatThreeDigits(product.oldPrice)}`}
           </span>
-          <div className="valoration debug items-center flex flex-row gap-1 w-auto h-auto">
+          <div className="valoration items-center flex flex-row gap-1 w-auto h-auto">
             {Array(numberStars)
               .fill("x")
               .map((_, indx) => (
                 <StarYellow key={indx} />
               ))}
-            {Array(5 - numberStars)
+            {Array(excedent)
               .fill("x")
               .map((_, indx) => (
                 <StarGray key={indx} />
