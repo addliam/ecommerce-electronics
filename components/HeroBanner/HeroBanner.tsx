@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import HeroItem from "./HeroItem";
 import HeroContent from "../../types/HeroContent";
+import Slider from "./Slider";
 
 const HeroBanner = () => {
   const [index, setIndex] = useState(0);
@@ -30,8 +31,10 @@ const HeroBanner = () => {
     slug: "/product-slug2",
   };
   const offsetItemPercentage = 52;
+  const TwoSlidesOnPixels = 966;
   // numberElements/2 - 1 cause start at 0
-  const maxIndex = 1;
+  const numberElements = 5;
+  const maxIndex = Math.ceil(numberElements / 2);
   const moveLeft = () => {
     setIndex((prev): any => {
       if (prev <= 0) {
@@ -43,7 +46,7 @@ const HeroBanner = () => {
   };
   const moveRight = () => {
     setIndex((prev): any => {
-      if (prev >= maxIndex) {
+      if (prev >= maxIndex - 1) {
         return prev;
       } else {
         return prev + 1;
@@ -51,7 +54,7 @@ const HeroBanner = () => {
     });
   };
   return (
-    <section className="w-full relative py-4 px-[12.375em] bg-[#4852C1] overflow-hidden">
+    <section className="w-full relative py-4 bg-[#4852C1] overflow-hidden">
       <div
         onClick={() => moveLeft()}
         className="cursor-pointer absolute z-20 left-[7em] top-[40%] rounded-[50%] w-fit h-fit px-2 py-2"
@@ -74,10 +77,15 @@ const HeroBanner = () => {
           alt="chevron left"
         ></Image>
       </div>
-      <div className="overflow-hidden max-w-[956px] h-auto">
+      <div
+        style={{ maxWidth: `${TwoSlidesOnPixels}px` }}
+        className="overflow-hidden mx-auto h-auto"
+      >
         <div
           style={{
-            transform: `translateX(-${offsetItemPercentage * 2 * index}%)`,
+            transform: `translateX(-${
+              TwoSlidesOnPixels * index + index * 16
+            }px)`,
           }}
           className="smoothTransition flex flex-row gap-4 justify-center-center"
         >
@@ -85,7 +93,12 @@ const HeroBanner = () => {
           <HeroItem hero={fakeData2} />
           <HeroItem hero={fakeData3} />
           <HeroItem hero={fakeData2} />
+          <HeroItem hero={fakeData2} />
+          <HeroItem hero={fakeData3} />
         </div>
+      </div>
+      <div className="py-3 mt-2 w-full flex items-center justify-center">
+        <Slider index={index} total={maxIndex} />
       </div>
     </section>
   );
