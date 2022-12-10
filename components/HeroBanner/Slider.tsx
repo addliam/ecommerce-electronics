@@ -18,7 +18,11 @@ const Slider = ({ index, total }: SliderProps) => {
       {Array(total)
         .fill("x")
         .map((_, indx) => {
-          return index === indx ? <ActiveCircle /> : <InactiveCircle />;
+          return index === indx ? (
+            <ActiveCircle key={indx} />
+          ) : (
+            <InactiveCircle key={indx} />
+          );
         })}
     </div>
   );

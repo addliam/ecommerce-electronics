@@ -1,38 +1,20 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import HeroItem from "./HeroItem";
-import HeroContent from "../../types/HeroContent";
+import ProductOffer from "../../types/ProductOffer";
 import Slider from "./Slider";
 
-const HeroBanner = () => {
+type HeroBannerProps = {
+  offers: ProductOffer[];
+};
+
+const HeroBanner = ({ offers }: HeroBannerProps) => {
+  console.log(offers);
   const [index, setIndex] = useState(0);
-  const fakeData1: HeroContent = {
-    text: "50% de descuento en Apple Watch",
-    image: {
-      src: "/assets/images/reloj.png",
-      alt: "watch",
-    },
-    slug: "/product-slug1",
-  };
-  const fakeData2: HeroContent = {
-    text: "40% de descuento en Headphones",
-    image: {
-      src: "/assets/images/audifonos.png",
-      alt: "headphones",
-    },
-    slug: "/product-slug2",
-  };
-  const fakeData3: HeroContent = {
-    text: "20% de descuento en Auriculares",
-    image: {
-      src: "/assets/images/audifonos.png",
-      alt: "headphones",
-    },
-    slug: "/product-slug2",
-  };
+
   const offsetItemPercentage = 52;
   const TwoSlidesOnPixels = 966;
-  const numberElements = 5;
+  const numberElements = offers.length;
   const maxIndex = Math.ceil(numberElements / 2);
   const moveLeft = () => {
     setIndex((prev): any => {
@@ -88,12 +70,9 @@ const HeroBanner = () => {
           }}
           className="smoothTransition flex flex-row gap-4 justify-center-center"
         >
-          <HeroItem hero={fakeData1} />
-          <HeroItem hero={fakeData2} />
-          <HeroItem hero={fakeData3} />
-          <HeroItem hero={fakeData2} />
-          <HeroItem hero={fakeData2} />
-          <HeroItem hero={fakeData3} />
+          {offers.map((offer, indx) => (
+            <HeroItem key={indx} hero={offer} />
+          ))}
         </div>
       </div>
       <div className="py-3 mt-2 w-full flex items-center justify-center">

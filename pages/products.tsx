@@ -1,15 +1,14 @@
-import React from "react";
-import AnimalList from "../components/common/AnimalList";
+import React, { useEffect } from "react";
 import HeroBanner from "../components/HeroBanner/HeroBanner";
 import Navbar from "../components/Navbar/Navbar";
 import ProductsList from "../components/Products/ProductsList";
 import ProductShort from "../types/ProductShort";
-
+import ProductOffer from "../types/ProductOffer";
 import { client, urlFor } from "../lib/sanityClient";
 
 // 2023-12-8
 
-const ProductsPage = ({ products }: any) => {
+const ProductsPage = ({ products, offers }: any) => {
   const productsData: ProductShort[] = products.map((product: any) => ({
     imageSrc: urlFor(product.imageSrc).width(244).height(176).url(),
     name: product.name,
@@ -19,9 +18,11 @@ const ProductsPage = ({ products }: any) => {
     description: product.description,
     rating: product.rating,
   }));
-
-  console.log(productsData);
-
+  const offersData: ProductOffer[] = offers.map((offer: any) => ({
+    slug: offer.slug,
+    imageSrc: urlFor(offer.image).url(),
+    text: offer.text,
+  }));
   return (
     <main className="bg-[#EBEBEB] overflow-x-hidden">
       <div></div>
@@ -29,7 +30,7 @@ const ProductsPage = ({ products }: any) => {
         <Navbar />
       </div>
       <div className="max-w-[1380px] mx-auto">
-        <HeroBanner />
+        <HeroBanner offers={offersData} />
       </div>
       <div className="layout mx-auto w-fit max-w-[1380px]">
         <div className="w-full mt-5 mb-2">
@@ -46,9 +47,16 @@ export default ProductsPage;
 export async function getStaticProps() {
   let QUERY = '*[_type == "product"]';
   const products = await client.fetch(QUERY);
+  let QUERYOFFER = `*[_type == "productoffer"] {
+    image,
+    text,
+    "slug": *[_id == ^.productref._ref][0].slug.current
+  }`;
+  const offers = await client.fetch(QUERYOFFER);
   return {
     props: {
       products,
+      offers,
     },
   };
 }

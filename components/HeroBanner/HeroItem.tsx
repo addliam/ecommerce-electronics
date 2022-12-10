@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import HeroContent from "../../types/HeroContent";
+import ProductOffer from "../../types/ProductOffer";
 
 interface HeroItemProps {
-  hero: HeroContent;
+  hero: ProductOffer;
 }
 
 const HeroItem = ({ hero }: HeroItemProps) => {
@@ -20,8 +20,8 @@ const HeroItem = ({ hero }: HeroItemProps) => {
       </div>
       <div className="absolute top-4 right-4 ">
         <Image
-          src={hero.image.src}
-          alt={hero.image.alt}
+          src={hero.imageSrc}
+          alt={"banner offer product"}
           width={240}
           height={240}
         ></Image>
