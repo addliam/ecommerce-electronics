@@ -48,6 +48,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
   const numberStars = product.rating ? ~~product.rating : 1;
   const excedent = 5 - numberStars;
 
+  const buyThisItem = () => {
+    console.log(`Trying buy item with ID: ${product._id}`);
+  };
+
   return (
     <div className="flex flex-row w-auto bg-white">
       <div className="px-2 py-3 flex flex-row justify-center items-center w-[15.25em] min-h-[11em] ">
@@ -97,7 +101,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
       </div>
       <div className="buttons flex px-2 items-center pr-4">
         <div className="flex flex-col gap-2">
-          <button className="text-[15px] w-[10em] text-center py-2 bg-primary text-white">
+          <button
+            onClick={() => buyThisItem()}
+            className="text-[15px] w-[10em] text-center py-2 bg-primary text-white"
+          >
             Comprar ahora
           </button>
           <button className="text-[15px] w-[10em] py-2 bg-transparent border-[1px] border-primary text-primary">

@@ -10,6 +10,7 @@ import { client, urlFor } from "../lib/sanityClient";
 
 const ProductsPage = ({ products, offers }: any) => {
   const productsData: ProductShort[] = products.map((product: any) => ({
+    _id: product._id,
     imageSrc: urlFor(product.imageSrc).width(244).height(176).url(),
     name: product.name,
     slug: product.slug.current,

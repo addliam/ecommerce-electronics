@@ -10,8 +10,8 @@ const ProductsList = ({ data }: ProductsListProps) => {
   return (
     <section className="flex flex-col gap-3  ">
       {data.length > 0 ? (
-        data.map((product, indx) => (
-          <ProductItem product={product} key={indx} />
+        data.map((product) => (
+          <ProductItem product={product} key={product._id} />
         ))
       ) : (
         <></>

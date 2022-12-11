@@ -9,7 +9,6 @@ type HeroBannerProps = {
 };
 
 const HeroBanner = ({ offers }: HeroBannerProps) => {
-  console.log(offers);
   const [index, setIndex] = useState(0);
 
   const offsetItemPercentage = 52;

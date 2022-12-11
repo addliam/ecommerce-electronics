@@ -1,4 +1,5 @@
 interface ProductShort {
+  _id: string;
   imageSrc: string;
   name: string;
   slug: string;
