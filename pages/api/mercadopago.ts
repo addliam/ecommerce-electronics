@@ -21,7 +21,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  // @data: productId, quantity
+  // @data: id, quantity
+  // @description: id -> product id, quantity -> product quantity
   if (req.method === "POST") {
     // Crea un objeto de preferencia
     if (!req.body.id || !req.body.quantity || !isNumeric(req.body.quantity)) {
@@ -37,7 +38,7 @@ export default async function handler(
       // curlp http://localhost:3000/api/mercadopago -d '{"id":"51a74580-8a50-4b23-8dba-d6db01806efd","quantity":"1"}'
       let preference = {
         back_urls: {
-          success: "http://localhost:3000/success",
+          success: "http://localhost:3000/products?success=true",
           failure: "http://localhost:3000/failure",
           pending: "http://localhost:3000/pending",
         },
@@ -55,7 +56,7 @@ export default async function handler(
         preference
       );
       console.log(responseMercadoPago.body);
-      res.status(200).json({ success: "VALID ID. Found in database" });
+      res.status(200).json(responseMercadoPago.body);
     } catch (error) {
       console.log(error);
       res.status(400).json({ error: "Invalid id. Not found in database" });

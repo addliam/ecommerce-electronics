@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import ProductShort from "../../types/ProductShort";
+import axios from "axios";
 
 const StarYellow = () => {
   return (
@@ -45,11 +47,23 @@ const formatThreeDigits = (value: number): string => {
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
+  const [isLoadingLinkMercadoPago, setIsLoadingLinkMercadoPago] =
+    useState(false);
+  const router = useRouter();
   const numberStars = product.rating ? ~~product.rating : 1;
   const excedent = 5 - numberStars;
 
-  const buyThisItem = () => {
+  const buyThisItem = async () => {
     console.log(`Trying buy item with ID: ${product._id}`);
+    let data = {
+      id: product._id,
+      quantity: 1,
+    };
+    setIsLoadingLinkMercadoPago(true);
+    let mercadoPagoData = await axios.post("/api/mercadopago", data);
+    console.log(mercadoPagoData.data);
+    router.push(mercadoPagoData.data.init_point);
+    setIsLoadingLinkMercadoPago(false);
   };
 
   return (
