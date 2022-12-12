@@ -34,7 +34,14 @@ export default async function handler(
       }`;
     try {
       const product = await client.fetch(QUERY);
+      // curlp http://localhost:3000/api/mercadopago -d '{"id":"51a74580-8a50-4b23-8dba-d6db01806efd","quantity":"1"}'
       let preference = {
+        back_urls: {
+          success: "http://localhost:3000/success",
+          failure: "http://localhost:3000/failure",
+          pending: "http://localhost:3000/pending",
+        },
+        auto_return: "approved",
         items: [
           {
             id: product._id,
